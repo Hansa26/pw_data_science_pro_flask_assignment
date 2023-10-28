@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+ 
+{% block y %}
+ 
+   {% if session.name %}
+      You are Registered {{ session.name }} 
+      <a href="/logout">logout</a>.
+   {% else %}
+      You are not Registered. 
+      <a href="/login">login</a>.
+   {% endif %}
+ 
+{% endblock %}

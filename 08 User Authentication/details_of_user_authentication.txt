@@ -1,0 +1,77 @@
+"""
+Flask-Login helps us manage user sessions
+Flask-SQLAlchemy helps us store our users data, such as their username and password
+"""
+
+Step 1: Import the necessary modules.
+-------------------------------------
+We first import the classes we need from Flask, Flask-SQLAlchemy, and Flask-Login. 
+We then create our flask application, indicate what database Flask-SQLAlchemy should connect to, and initialize the Flask-SQLAlchemy extension. 
+We also need to specify a secret key, which can be any random string of characters, and is necessary as Flask-Login requires it to sign 
+session cookies for protection again data tampering. Next, we initialize the LoginManager class from Flask-Login, to be able to log in and out users.
+
+
+Step 2: Create a User Model & Database:
+---------------------------------------
+To be able to store users’ information such as their username and password, we need to create a table with Flask-SQLAlchemy, 
+this is done by creating a model that represents the information we want to store. In this case, we first create a Users class and make it a 
+subclass of db.Model to make it a model with the help of Flask-SQLAlchemy. We also make the Users class a subclass of UserMixin, which will help to 
+implement properties such as is_authenticated to the Users class. We will also need to create columns within the user model, to store individual attributes, 
+such as the user’s username. When creating a new column, we need to specify the datatype such as db.Integer and db.String as well. When creating columns, 
+we also need to specify keywords such as unique = True, if we want to ensure values in the column are unique, nullable = False, which indicates that the 
+column’s values cannot be NULL, and primary_key = True, which indicates that the row can be identified by that primary_key index. Next, the db.create_all 
+method is used to create the table schema in the database.
+
+
+Step 3: Adding a user loader:
+-----------------------------
+Before implementing the functionality for authenticating the user, we need to specify a function that Flask-Login can use to retrieve a 
+user object given a user id. This functionality is already implemented by Flask-SQLAlchemy, we simply need to query and use the get method with the user id as the argument.
+
+
+Step 4: Registering new accounts with Flask-Login:
+--------------------------------------------------
+To allow the user to register an account, we need to create the HTML. This will need to contain a form that allows
+the user to enter their details, such as their username and chosen password.
+
+Create a route that renders the template, and creates the user account if they make a POST request. 
+We create a new route with Flask by using the @app.route decorator. 
+The @app.route decorator allows us to specify the route it accepts, and the methods it should accept. 
+By default, it only accepts requests using the GET method, but when the form is submitted it is done using a POST request, 
+so we’ll need to make POST an accepted method for the route as well. Within the register function that is called 
+whenever the user visits that route, we can check if the method used was a POST request using the request variable 
+that Flask provides and that needs to be imported. If a post request was made, this indicates the user is trying to 
+register a new account, so we create a new user using the Users model, with the username and password set to whatever 
+the user entered, which we can get by using request.form.get Lastly, we add the user object that was created to the 
+session and commit the changes made. Once the user account has been created, we redirect them to a route with a 
+callback function called “login”, which we will create in a moment. 
+Ensure that you also import the redirect and url_for functions from Flask.
+
+
+Step 5: Allowing users to log in with Flask-Login:
+--------------------------------------------------
+Like with creating the registered route, we first need a way for the user to log in through an HTML form. 
+
+Add the functionality to log in to the user within a login function for the /login route.
+With the login route, we do the same thing of checking if the user made a POST request. 
+If they did, we filter the users within the database for a user with the same username as the one being submitted. 
+Next, we check if that user has the same password as the password the user entered in the form. If they are the same, 
+we log-in to the user by using the login_user function provided by Flask-Login. We can then redirect the user back to a route with a function called “home”.
+If the user didn't make a POST request, and instead a GET request, then we'll render the login template.
+
+
+Step 6: Conditionally rendering HTML based on the user’s authentication status with Flask-Login:
+------------------------------------------------------------------------------------------------
+When using Flask, it uses Jinja to parse the templates. 
+Jinja is a templating engine that allows us to add code, such as if-else statements within our HTML, 
+we can then use it to conditionally render certain elements depending on the user’s authentication status 
+for example the current_user variable is exported by Flask-Login, and we can use it within the Jinja template 
+to conditionally render HTML based on the user’s authentication status.
+
+Add the functionality to render the homepage when the user visits the “/” route.
+This will then render the template of home.html whenever the user visits the “/” route. After running the code in main.py, navigate to http://127.0.0.1:8008/
+
+
+Step 7: Adding Logout Functionality:
+------------------------------------
+Here, we will update the home.html template to the following to add a logout link, and this will give the homepage a link to log out the user if they are currently logged in.

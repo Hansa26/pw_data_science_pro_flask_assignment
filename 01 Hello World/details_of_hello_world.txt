@@ -1,0 +1,48 @@
+Program 1: Create a Flask app that displays "Hello, World!" on the homepage.
+==========================================================================
+
+Flask is a micro web framework for Python that allows you to build web applications easily.
+
+Detailed Explanation of Hello World:
+
+Step 1. Import Flask:
+---------------------
+from flask import Flask
+
+import the Flask class from the Flask library, allowing you to create a Flask web application.
+
+Step 2. Create a Flask application instance:
+--------------------------------------------
+app = Flask(__name__)
+
+Here, we create an instance of the Flask class and assign it to the variable app. 
+The __name__ argument is passed to Flask, and it helps Flask determine the root path of the application.
+
+Step 3. Define a route and a view function:
+-------------------------------------------
+@app.route("/homepage")
+def hello():
+    return f"Hello, World!"
+
+This code defines a route for the URL path "/homepage." When a user accesses this path in a web browser, the hello function is executed. 
+The function simply returns the string "Hello, World!" as a response. This text will be displayed in the user's web browser when they visit the "/homepage" URL.
+
+Step 4. Run the application:
+----------------------------
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000)
+
+This block of code ensures that the Flask application only runs when the script is executed directly (not when it's imported as a module in another script). It also specifies the host and port on which the application should listen.
+
+host="0.0.0.0" means the application will be accessible from any available network interface. This allows the application to be accessed both locally and externally.
+port=8000 specifies that the application will listen on port 8000.
+
+
+Step 5. Execute this Application:
+---------------------------------
+
+To run this Flask application, we should save the code in a Python file (e.g., "app.py"), and then execute the file. 
+We can do this by running python app.py in your terminal. After running the application, you can access it in your web browser by visiting 
+"http://localhost:8000/homepage" or "http://your-server-ip:8000/homepage" if you want to access it from another device on the same network.
+
+When we access this URL, we'll see the "Hello, World!" message displayed in browser, as defined in the hello function.

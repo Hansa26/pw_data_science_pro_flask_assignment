@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Session Example</title>
+</head>
+<body>
+    <h1>User Session Example</h1>
+    <form method="POST" action="/set_session">
+        <label for="username">Enter your username:</label>
+        <input type="text" name="username" id="username">
+        <button type="submit">Set Session</button>
+    </form>
+    <p>Welcome, {{ username }}!</p>
+</body>
+</html>

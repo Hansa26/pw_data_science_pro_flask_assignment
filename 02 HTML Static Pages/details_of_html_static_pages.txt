@@ -1,0 +1,60 @@
+Program 2: Build a Flask app with static HTML pages and navigate between them.
+==============================================================================
+ 
+It demonstrates the use of Flask's render_template function to render HTML templates for different routes.
+
+Detailed Explanation of HTML Static Pages:
+
+1. import Flask and render_template:
+------------------------------------
+from flask import Flask, render_template
+
+This line imports the Flask class from the Flask library, as well as the render_template function, which is used to render HTML templates.
+
+2. Create a Flask application instance:
+---------------------------------------
+app = Flask(__name__)
+
+Here, we create an instance of the Flask class and assign it to the variable app. 
+The __name__ argument is passed to Flask, and it helps Flask determine the root path of the application.
+
+3. Define routes and view functions:
+------------------------------------
+@app.route("/home")
+def show_main_page():
+    return render_template('index.html')
+
+This code defines a route for the URL path "/home." 
+When a user accesses this path in a web browser, the show_main_page function is executed. 
+This function uses render_template to render an HTML template called "index.html." 
+This allows you to create a dynamic web page using HTML templates.
+
+@app.route("/page1")
+def show_page1():
+    return render_template('page1.html')
+
+@app.route("/page2")
+def show_page2():
+    return render_template('page2.html')
+
+These routes, "/page1" and "/page2," also render different HTML templates ("page1.html" and "page2.html") when accessed.
+
+4. Run the application:
+-----------------------
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8001)
+
+This block of code ensures that the Flask application only runs when the script is executed directly (not when it's imported as a module in another script). It also specifies the host and port on which the application should listen.
+
+host="0.0.0.0" means the application will be accessible from any available network interface. This allows the application to be accessed both locally and externally.
+port=8001 specifies that the application will listen on port 8000.
+
+
+5. Execute this Application:
+----------------------------
+To run the application, save the code in a Python file (e.g., "app.py") and execute the file using python app.py. 
+After running the application, you can access it in your web browser using the following URL:
+"http://localhost:8001/home" to access the main page. --> We can navigate between these pages, when we access this URL
+"http://localhost:8001/page1" to access page 1.
+"http://localhost:8001/page2" to access page 2.
+

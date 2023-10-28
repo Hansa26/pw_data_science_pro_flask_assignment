@@ -1,0 +1,55 @@
+Program 5: Implement user sessions in a Flask app to store and display user-specific data.
+==========================================================================================
+
+Flask-Session:
+--------------
+Flask-Session is an extension for Flask that supports Server-side Session to your application.
+The Session is the time between the client logs in to the server and logs out of the server.
+The data that is required to be saved in the Session is stored in a temporary directory on the server.
+The data in the Session is stored on the top of cookies and signed by the server cryptographically.
+Each client will have their own session where their own data will be stored in their session.
+
+Uses of Session:
+----------------
+Remember each user when they log in
+Store User-specific website settings (theme)
+Store E-Commerce site user items in the cart
+
+This is specific to the flask_session library only:
+---------------------------------------------------
+
+SESSION_PERMANENT = False --> This session has a default time limit of some number of minutes or hours or days after which it will expire
+
+SESSION_TYPE = "filesystem" --> It will store in the hard drive (these files are stored under a '/flask_session' folder in your config directory.) or any online id account,
+and it is an alternative to using a Database or something else like that.
+
+
+Step 1: Import Flask and Flask-Session:
+---------------------------------------
+We need to firstly import Flask and Flask-Session to handle session management
+
+Step 2: Configuration:
+----------------------
+The configuration settings for Flask-Session are defined:
+SESSION_PERMANENT: This setting is set to False, meaning the session has a default time limit before it expires.
+SESSION_TYPE: It is set to "filesystem," indicating that session data will be stored on the server's hard drive.
+
+Step 3: Create a Flask App:
+---------------------------
+The Flask application is created with "app = Flask(__name__)"
+
+Step 4: Routes and Session Usage:
+---------------------------------
+The following routes and functionality are defined:
+"/" (index): If the user is not logged in (the "name" key is not in the session), they are redirected to the login page.
+Otherwise, the user is shown the "index.html" template with their name.
+"/login": This route handles both GET and POST requests. When the user submits the login form (POST request), their name
+ is stored in the session, and they are redirected to the index page. The login form is displayed for GET requests.
+"/logout": This route clears the "name" key from the session, effectively logging the user out, and redirects them to
+the index page.
+
+Step 5: Run the Flask App:
+--------------------------
+The Flask app is run with app.run(host="0.0.0.0", port=8004). It listens on all network interfaces ("0.0.0.0") and port 8004.
+
+

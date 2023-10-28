@@ -1,0 +1,50 @@
+Program 3: Develop a Flask app that uses URL parameters to display dynamic content.
+===================================================================================
+
+This Flask program is designed to handle URL parameters passed as query parameters. It extracts the values of the "name" and "age" parameters from the URL and displays a message based on those values. Here's a detailed explanation of the code:
+
+1. Import Flask and request:
+----------------------------
+from flask import Flask, request
+
+This line imports the Flask class from the Flask library and the `request` object. 
+The `request` object is used to access data sent with the request, including query parameters from the URL.
+
+2. Create a Flask application instance:
+---------------------------------------
+app = Flask(__name__)
+
+As before, this line creates an instance of the Flask class and assigns it to the variable `app`.
+
+3. Define a route and a view function:
+--------------------------------------
+@app.route("/urlparams")
+def get_url_parameters():
+    name = request.args.get("name")
+    age = request.args.get("age")
+
+    return f"Hi, My name is {name}, and I am {age} years old!"
+
+In this code, a route is defined for the URL path "/urlparams." 
+When a user accesses this path in a web browser, the `get_url_parameters` function is executed. 
+This function uses the `request.args.get` method to retrieve the values of the "name" and "age" query parameters from the URL.
+
+It then constructs a response string that includes the extracted values and returns it as a message, 
+such as "Hi, My name is [name], and I am [age] years old!" This message will vary depending on the values provided in the URL.
+
+4. Run the application:
+-----------------------
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8002)
+
+
+Like in the previous examples, this block of code ensures that the Flask application only runs when the script is executed directly. 
+It specifies the host and port on which the application should listen.
+
+- host="0.0.0.0" means the application will be accessible from any available network interface.
+- port=8002 specifies that the application will listen on port 8002.
+
+To use this Flask application, we can access it in web browser by visiting a URL like "http://localhost:8002/urlparams?name=John&age=25". 
+When we visit this URL with query parameters, the `get_url_parameters` function will extract the values and display a message based on them.
+
+For example, if we visit "http://localhost:8002/urlparams?name=John&age=25," the response will be "Hi, My name is John, and I am 25 years old!"
