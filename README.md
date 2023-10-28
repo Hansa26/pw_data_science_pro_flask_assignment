@@ -49,9 +49,7 @@
 
 
 ## Program 13: Design a Flask-socketio application for sending notifications to connected clients.
-### File Name: [13 Notify User Updates](https://github.com/Hansa26/pw_data_science_pro_flask_assignment/tree/2ccb56b9de377735837db4c0066169564ae6bf90/13%20Notify%20User%20Updates)https://github.com/Hansa26/pw_data_science_pro_flask_assignment/tree/2ccb56b9de377735837db4c0066169564ae6bf90/13%20Notify%20User%20Updates
-
-## Basic Flask Applications
+### File Name: [13 Notify User Updates](https://github.com/Hansa26/pw_data_science_pro_flask_assignment/tree/2ccb56b9de377735837db4c0066169564ae6bf90/13%20Notify%20User%20Updates)
 
 
 
